@@ -1,0 +1,35 @@
+<Configuration>
+    <Properties>
+        <Property name="LOG_PATTERN">Iteracio: %x, %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{${LOG_PATTERN}}"/>
+        </Console>
+        <File name="File1" fileName="kijelentés.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="KIJELENTES" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File2" fileName="kérelem.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="KERELEM" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File3" fileName="marker-mentes.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File4" fileName="Győrfi_Pál.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <TimeFilter start="05:00:00" end="20:00:00" onMatch="DENY" onMismatch="ACCEPT"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File1"/>
+            <AppenderRef ref="File2"/>
+            <AppenderRef ref="File3"/>
+            <AppenderRef ref="File4"/>
+        </Root>
+    </Loggers>
+</Configuration>
